@@ -20,7 +20,7 @@ echo <<< LABEL
     Kurs programowania
     <br>
   LABEL;
-
+//say hello
 $text = <<< LABEL
     <hr>
     Opcja II<br>
