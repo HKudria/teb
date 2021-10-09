@@ -14,8 +14,6 @@
 
 //heredoc
 echo <<< LABEL
-
-    Opcja II <br>
     Imię i nazwisko $name $surname <br>
     Kurs programowania
     <br>
