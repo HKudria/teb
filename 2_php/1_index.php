@@ -12,7 +12,31 @@
     echo 'imię: $name';
     echo "<br>imię: $name<hr>";
 
+//heredoc
+echo <<< LABEL
+    <hr>
+    Opcja II <br>
+    Imię i nazwisko $name $surname <br>
+    Kurs programowania
+    <br>
+  LABEL;
 
+$text = <<< LABEL
+    <hr>
+    Opcja II<br>
+    Imię i nazwisko $name $surname <br>
+    Kurs programowania
+    <br>
+  LABEL;
+
+  echo "<br>$text";
+
+//składnia nowdoc
+echo <<< 'LABEL'
+    Imię i nazwisko $name $surname <br>
+    Kurs programowania
+    <br>
+  LABEL;
 
      ?>
   </body>
