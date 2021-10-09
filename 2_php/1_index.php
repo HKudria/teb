@@ -14,7 +14,7 @@
 
 //heredoc
 echo <<< LABEL
-    <hr>
+
     Opcja II <br>
     Imię i nazwisko $name $surname <br>
     Kurs programowania
@@ -29,7 +29,7 @@ $text = <<< LABEL
     <br>
   LABEL;
 
-  echo "<br>$text";
+  echo "$text<br>";
 
 //składnia nowdoc
 echo <<< 'LABEL'
