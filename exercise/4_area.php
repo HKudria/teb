@@ -7,8 +7,8 @@
   <body>
     Podaj dlugości stron: <br><br>
   <form action="skrypt.php" method="post">
-    <input type="text" name="a" placeholder="Podaj dlugość strony A">
-    <input type="text" name="b" placeholder="Podaj dlugość strony B">
+    <input type="number" name="a" placeholder="Podaj dlugość strony A">
+    <input type="number" name="b" placeholder="Podaj dlugość strony B">
     <input type="submit" name="button" value="Zatwierd">
   </form>
 
