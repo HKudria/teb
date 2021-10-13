@@ -12,10 +12,5 @@
     <input type="submit" name="button" value="Zatwierd">
   </form>
 
-  <?php
-  include 'skrypt.php';
-   ?>
-
-
   </body>
 </html>
