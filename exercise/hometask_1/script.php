@@ -6,10 +6,8 @@
   </head>
   <body>
     <?php
-    $year = date("Y");
-
     if (!empty($_POST["manufactury"])&&!empty($_POST["model"])&&!empty($_POST["color"])&&!empty($_POST["year"])) {
-      $howManyYear = $year - (int) $_POST["year"];
+      $howManyYear = date("Y") - (int) $_POST["year"];
       if ($howManyYear < 20) {
         $string = "Masz nowe auto";
       } else  {
@@ -33,5 +31,7 @@
       <?php
     }
      ?>
+
+     <br><a href="./">Strona Główna</a>
   </body>
 </html>
