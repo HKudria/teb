@@ -17,7 +17,7 @@
         Danne twojego sanohodu: <br>
         Marka : $_POST[manufactury] <br>
         Model : $_POST[model] <br>
-        Kolor : $_POST[color] <br>
+        Kolor : $_POST[color] <a style="color:$_POST[color];">||||||||||||</a> <br> 
         Rok produkcji : $_POST[year] <br>
         Twoje auto ma $howManyYear lat  - $string
 
