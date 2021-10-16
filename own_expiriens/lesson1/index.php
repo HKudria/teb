@@ -5,6 +5,8 @@
     <title>PHP - marathon</title>
   </head>
   <body>
+    <a href="./odmiana.php">odmiana</a>
+
     <h1>Function</h1>
     <?php
     const PI = 3.14;
