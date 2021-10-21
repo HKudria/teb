@@ -11,14 +11,17 @@
         'Two' => ['2','22','222'],
         'Three' => ['3','33','333']
       ];
-
+        echo "<ul>";
       foreach ($array as $key => $value) {
-        echo "<ul>" , $key;
+          echo "<li>";
+        echo  $key;
+            echo "<ol>";
         foreach ($value as $key1 => $date) {
           echo "<li>$date</li>";
         }
-        echo "</ul>";
+        echo "</ol></li>";
       }
+        echo "</ul>";
 
       $text = file_get_contents("1.txt");
 
@@ -32,7 +35,7 @@
 
       foreach ($files as $file) {
         if(is_file($file))
-        echo "<br><a href = \"./script.php/?id=$file\">File $file</a> ";
+        echo "<br><a href = \"./script.php?id=$file\">File $file</a> ";
       }
 
 echo "<br><br>";
