@@ -22,6 +22,7 @@ $colors = array();
   //  print_r($arraySmall);
   //  echo "</pre><br>";
   $count = 1;
+  echo "Ilość ulublionych kolorów:" .count($arraySmall)."<br>";
   foreach ($arraySmall as $key => $value) {
 
     echo "Kolor $count: $value <br>";
