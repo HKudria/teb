@@ -12,13 +12,13 @@ foreach ($_POST as $key => $value) {
 }
 
 require_once './connect.php';
-$sql = "INSERT INTO `users` (`user_id`, `city_id`, `name`, `surname`, `birthday`, `create_user`) VALUES (NULL, '$_POST[city_id]', '$_POST[name]', '$_POST[surname]', '$_POST[birthday]', current_timestamp());";
+$sql = "UPDATE `users` SET `city_id` = '$_POST[city_id]', `name` = '$_POST[name]', `surname` = '$_POST[surname]', `birthday` = '$_POST[birthday]' WHERE `users`.`user_id` = '$_GET[user_id]'; ";
 $connect->query($sql);
 
 if($connect->affected_rows){
-    $_SESSION['error'] = "Prawidlowo dodano użytkownika";
+    $_SESSION['error'] = "Prawidlowo zmieniono danne użytkownika";
 } else {
-    $_SESSION['error'] = "Bląd pod czas dodawania użytkownika";
+    $_SESSION['error'] = "Bląd pod czas zmiany dannych użytkownika";
 }
 
 

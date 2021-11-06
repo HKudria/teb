@@ -33,6 +33,7 @@
             <td>$row[city] </td>
             <td>$row[birthday] </td>
             <td><a href="./scripts/delete.php?deleteId=$row[user_id]">Usuń</a></td>
+            <td><a href="./5_db_select_table_update.php?updateId=$row[user_id]">Aktualizuj</a></td>
           </tr>
 
         USER;
@@ -88,6 +89,43 @@
        echo '<a href="./4_db_select_table_insert.php?addUser=">Dodaj użytkownika</a>';
      }
 
+//zmiana dannych użytkownika
+     if(isset($_GET['updateId'])){
+      $sql1 = "SELECT * FROM `users` WHERE `user_id` = $_GET[updateId];";
+      $result1=$connect->query($sql1);
+      $toUpdate=$result1->fetch_assoc();
+      echo <<< FORM
+
+       <h4> Zmienić dane użytkownika </h4>
+       <form action="./scripts/update.php?user_id=$_GET[updateId]" method="post">
+         <input type="text" name="name" value="$toUpdate[name]"> <br><br>
+         <input type="text" name="surname" value="$toUpdate[surname]"> <br><br>
+         <select name="city_id">
+      FORM;
+
+
+      $sql = "SELECT * FROM `cities` ";
+      $result2=$connect->query($sql);
+      while ($city=$result2->fetch_assoc()) {
+        if($city['city_id'] == $toUpdate['city_id']){
+          echo <<< CITY
+          <option selected value="$city[city_id]">$city[city]</option>"
+          CITY;
+        } else {
+          echo <<< CITY
+          <option value="$city[city_id]">$city[city]</option>"
+          CITY;
+        }
+
+      }
+
+      echo <<< FORM2
+        </select> Wybierz miasto<br><br>
+         <input type="date" name="birthday" value="$toUpdate[birthday]"> Data urodzenia <br><br>
+         <input type="submit" name="" value="Zatwierdż">
+       </form>
+       FORM2;
+     }
       ?>
 
         </body>
