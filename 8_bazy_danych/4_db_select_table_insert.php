@@ -53,14 +53,21 @@
      }
      echo "<hr>";
 
+     if(!empty($_SESSION['error'])){
+       echo $_SESSION['error'] . "<br>";
+       unset($_SESSION['error']);
+     }
 
      if(isset($_GET['addUser'])){
+
        echo <<< FORM
+
+       <h4> Dodawanie użytkownika </h4>
        <form action="./scripts/insert.php" method="post">
          <input type="text" name="name" placeholder="Podaj imię"> <br><br>
          <input type="text" name="surname" placeholder="Podaj nazwisko"> <br><br>
-         <input type="number" name="Miasto" placeholder="Wprowadz Miasto"> <br><br>
-         <input type="date" name="date" placeholder="Wprowadz date urodzenia"> <br><br>
+         <input type="number" name="city_id" placeholder="Wprowadz Miasto"> <br><br>
+         <input type="date" name="birthday"> Data urodzenia <br><br>
          <input type="submit" name="" value="Zatwierdż">
        </form>
        FORM;
