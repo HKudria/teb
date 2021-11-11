@@ -12,7 +12,7 @@ foreach ($_POST as $key => $value) {
 }
 
 require_once './connect.php';
-$sql = "UPDATE `users` SET `city_id` = '$_POST[city_id]', `name` = '$_POST[name]', `surname` = '$_POST[surname]', `birthday` = '$_POST[birthday]' WHERE `users`.`user_id` = '$_GET[user_id]'; ";
+$sql = "UPDATE `users` SET `city_id` = '$_POST[city_id]', `name` = '$_POST[name]', `surname` = '$_POST[surname]', `birthday` = '$_POST[birthday]' WHERE `users`.`user_id` = '$_POST[user_id]'; ";
 $connect->query($sql);
 
 if($connect->affected_rows){

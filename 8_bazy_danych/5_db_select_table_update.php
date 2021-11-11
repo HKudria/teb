@@ -86,7 +86,7 @@
        </form>
        FORM2;
      } else {
-       echo '<a href="./4_db_select_table_insert.php?addUser=">Dodaj użytkownika</a>';
+       echo '<a href="./5_db_select_table_update.php?addUser=">Dodaj użytkownika</a>';
      }
 
 //zmiana dannych użytkownika
@@ -97,7 +97,8 @@
       echo <<< FORM
 
        <h4> Zmienić dane użytkownika </h4>
-       <form action="./scripts/update.php?user_id=$_GET[updateId]" method="post">
+       <form action="./scripts/update.php" method="post">
+          <input type="hidden" name="user_id" value="$toUpdate[user_id]">
          <input type="text" name="name" value="$toUpdate[name]"> <br><br>
          <input type="text" name="surname" value="$toUpdate[surname]"> <br><br>
          <select name="city_id">
