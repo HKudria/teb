@@ -61,7 +61,7 @@ if(empty($_POST['adres'])){
 } else {
   $adr = htmlentities(trim($_POST['adres']));
   unset($_POST['adres']);
-  //echo $adr;
+  //hpecho $adr;
   $html = explode('.',$adr);
   if($html[1]!="html"){
     $GLOBALS['error'] = "you have permision only to look .html files";
