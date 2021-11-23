@@ -4,17 +4,18 @@ session_start();
 if(!empty($_POST)){
   $error = 0;
   foreach ($_POST as $key => $value) {
+
     if(empty($value)){
+      if($key == "gender") continue;
       $_SESSION['error'] = "Nie wypelnilesz wszystkiego";
-      //header('location: ../pages/register.php');
-      echo "<script>history.back()</script>";
+      header('location: ../pages/register.php');
       exit();
     }
+    $_SESSION['form_date'][$key]=$value;
   }
   if (!isset($_POST['terms'])){
     $_SESSION['error'] = "Zatwierdż regulamin";
-    //header('location: ../pages/register.php');
-    echo "<script>history.back()</script>";
+    header('location: ../pages/register.php');
     exit();
   }
   if ($_POST['email']!=$_POST['email1']){
@@ -28,7 +29,7 @@ if(!empty($_POST)){
 
 
 if ($error==1){
-  echo "<script>history.back()</script>";
+  header('location: ../pages/register.php');
   exit();
 }
 $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -40,9 +41,9 @@ $sql = "INSERT INTO `users` (`email`, `city_id`, `name`, `surname`, `birthday`, 
 $stmt = $db->prepare($sql);
 $stmt->bind_param("sssssss", $_POST['email'], $_POST['city_id'], $_POST['name'], $_POST['surname'], $_POST['birthday'], $_POST['gender'], $pass);
 
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
+// echo "<pre>";
+// print_r($_POST);
+// echo "</pre>";
 }
 
 if($stmt->execute()){

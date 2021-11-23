@@ -44,7 +44,7 @@
 
       <form action="../scripts/register.php" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="name" placeholder="Podaj imię">
+          <input type="text" class="form-control" name="name" placeholder="Podaj imię" value="<?php echo $_SESSION['form_date']['name'] ?? ''; ?>">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -53,7 +53,7 @@
         </div>
         <form action="../../index.html" method="post">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="surname" placeholder="Podaj nazwisko">
+            <input type="text" class="form-control" name="surname" placeholder="Podaj nazwisko" value="<?php echo $_SESSION['form_date']['surname'] ?? ''; ?>">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -61,7 +61,7 @@
             </div>
           </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control"  name="email" placeholder="Email">
+          <input type="email" class="form-control"  name="email" placeholder="Email" value="<?php echo $_SESSION['form_date']['email'] ?? ''; ?>">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -69,7 +69,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control"  name="email1" placeholder="Powtóż Email">
+          <input type="email" class="form-control"  name="email1" placeholder="Powtóż Email" value="<?php echo $_SESSION['form_date']['email1'] ?? ''; ?>">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -102,6 +102,9 @@
               $sql = "SELECT * FROM `cities`";
               $result = $db->query($sql);
               while ($city = $result->fetch_assoc()) {
+                if($city['city_id'] == $_SESSION['form_date']['city_id']){
+                  echo "<option value=\"$city[city_id]\" selected> $city[city] </option>";
+                } else
                 echo "<option value=\"$city[city_id]\"> $city[city] </option>";
               }
               ?>
@@ -114,7 +117,7 @@
 
 <!-- birthday -->
         <div class="input-group mb-3">
-          <input type="date" class="form-control"  name="birthday">
+          <input type="date" class="form-control"  name="birthday" value="<?php echo $_SESSION['form_date']['birthday'] ?? ''; ?>">
           <div class="input-group-append">
             <div class="input-group-text">
               Data urodzenia
@@ -126,13 +129,15 @@
         <div class="input-group mb-3">
         <div class="form-group">
           <div class="custom-control custom-radio">
-            <input class="custom-control-input" type="radio" id="customRadio1" value="1" name="gender">
-            <label for="customRadio1" class="custom-control-label">Męzczyzna</label>
+            <input class="custom-control-input" type="radio" id="gender2" value="0" name="gender" <?php if($_SESSION['form_date']['gender']==0) echo "checked";?>>
+            <label for="gender2" class="custom-control-label">Kobieta</label>
           </div>
           <div class="custom-control custom-radio">
-            <input class="custom-control-input" type="radio" id="customRadio2" value="0" name="gender">
-            <label for="customRadio2" class="custom-control-label">Kobieta</label>
+            <input class="custom-control-input" type="radio" id="gender1" value="1" name="gender" <?php if($_SESSION['form_date']['gender']==1) echo "checked";?>>
+            <label for="gender1" class="custom-control-label">Męzczyzna</label>
           </div>
+
+
         </div>
 <!-- end plec -->
 
@@ -176,10 +181,10 @@
 <!-- /.register-box -->
 
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="../dist/js/adminlte.min.js"></script>
 </body>
 </html>

@@ -17,7 +17,7 @@
 </head>
 <body class="hold-transition login-page">
   <?php
-
+  unset($_SESSION['form_date']);
   if(!empty($_SESSION['error'])){
   if(isset($_SESSION['error']['succes'])){
     echo <<< KOMUNIKAT
@@ -31,7 +31,7 @@
                 <!-- /.card-body -->
      </div>
     KOMUNIKAT;
-    unset($_SESSION['error']);
+    unset($_SESSION['error']['succes']);
   } else {
     echo <<< KOMUNIKAT
      <div class="card card-danger">
