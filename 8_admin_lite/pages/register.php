@@ -51,7 +51,6 @@
             </div>
           </div>
         </div>
-        <form action="../../index.html" method="post">
           <div class="input-group mb-3">
             <input type="text" class="form-control" name="surname" placeholder="Podaj nazwisko" value="<?php echo $_SESSION['form_date']['surname'] ?? ''; ?>">
             <div class="input-group-append">
