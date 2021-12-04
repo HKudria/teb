@@ -2,7 +2,7 @@
 function stringRegex($string,$type = 'name'){
     $namePattern = "/^[a-zzżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,12}$/i";
     $emailPattern = "/^\w+@\w+\.[a-z]{2,5}$/i";
-    $passwordPattern = "^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$"; //min 6 znaków, mala i duża litera i znak specialny
+    $passwordPattern = "/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$/"; //min 6 znaków, mala i duża litera i znak specialny
     $surnamePattern = "/^[a-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,12}+([-]?+[a-zżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,12})?$/i";
 
     switch ($type){
@@ -25,7 +25,12 @@ function stringRegex($string,$type = 'name'){
     }
 
     if (preg_match($pattern, $string = trim($string))){
-        $string = ucfirst(mb_strtolower($string,'UTF-8'));
+
+        if ($type != 'password'){
+            $string = ucfirst(mb_strtolower($string,'UTF-8'));
+        }
+
+
         //sprawdzamy podwójne nazwisko
         if ($type == 'surname' && preg_match('/-/',$string)){
             $partsurname = explode('-', $string);
@@ -40,11 +45,11 @@ function stringRegex($string,$type = 'name'){
 
 }
 
-$test = "kowalskakonczak";
-if(stringRegex($test,'surname')){
-    $test = stringRegex($test,'surname');
-    echo $test;
-} else {
-    echo "mistake";
-}
+//$test = "adsA343f!";
+//if(stringRegex($test,'password')){
+//    $test = stringRegex($test,'password');
+//    echo $test;
+//} else {
+//    echo "mistake";
+//}
 

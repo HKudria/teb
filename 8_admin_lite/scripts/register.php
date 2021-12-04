@@ -1,6 +1,7 @@
 <?php
 session_start();
-//swrawdzenia wypelnenia wsztkich pólegal
+//swrawdzenia wypelnenia wsztkich dannych
+
 if(!empty($_POST)){
   $error = 0;
   foreach ($_POST as $key => $value) {
@@ -19,24 +20,21 @@ if(!empty($_POST)){
   require_once '../functions/regex.php';
 
 
+//sprawdzamy imię
   if(stringRegex($_POST['name'])){
     $name = stringRegex($_POST['name']);
   } else {
     $error = 1;
   }
 
+  //sprawdzamy nazwisko
   if(stringRegex($_POST['surname'],'surname')){
     $surname = stringRegex($_POST['surname'],'surname');
   } else {
     $error = 1;
   }
 
-  if (!isset($_POST['terms'])){
-    $_SESSION['error'] = "Zatwierdź regulamin";
-    header('location: ../pages/register.php');
-    exit();
-  }
-
+  //sprawdzamy email
   if(stringRegex($_POST['email'],'email')){
     $email = stringRegex($_POST['email'],'email');
   } else {
@@ -48,16 +46,36 @@ if(!empty($_POST)){
     $error = 1;
   }
 
-  if ($_POST['password']!=$_POST['password1']){
+
+  //sprawdzamy haslo
+  if(stringRegex($_POST['password'],'password')){
+    $pass = stringRegex($_POST['password'],'password');
+  } else {
+    $error = 1;
+  }
+
+  if ($pass!=stringRegex($_POST['password'],'password')){
     $_SESSION['error'] = "hasla są różne";
     $error = 1;
   }
 
 
-if ($error==1){
-  header('location: ../pages/register.php');
-  exit();
-}
+  //sprawdzamy plec
+  if($_POST['gender']!=0 || $_POST['gender']!=1){
+    $_SESSION['error'] = "Wypełnij prawidłowo płeć";
+    $error = 1;
+  }
+
+  if (!isset($_POST['terms'])){
+    $_SESSION['error'] = "Zatwierdź regulamin";
+    header('location: ../pages/register.php');
+    exit();
+  }
+
+  if ($error==1){
+    header('location: ../pages/register.php');
+    exit();
+  }
   $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
 //echo $pass;
 
