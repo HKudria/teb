@@ -1,5 +1,6 @@
 <?php
 function stringRegex($string,$type = 'name'){
+    //http://regex101.com
     $namePattern = "/^[a-zzżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,12}$/i";
     $emailPattern = "/^\w+@\w+\.[a-z]{2,5}$/i";
     $passwordPattern = "/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$/"; //min 6 znaków, mala i duża litera i znak specialny

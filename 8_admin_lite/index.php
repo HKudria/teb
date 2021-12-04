@@ -32,6 +32,7 @@
      </div>
     KOMUNIKAT;
     unset($_SESSION['error']['succes']);
+    unset($_SESSION['count']);
   } else {
     echo <<< KOMUNIKAT
      <div class="card card-danger">

@@ -92,6 +92,10 @@ $stmt->bind_param("sssssss", $email, $_POST['city_id'], $name, $surname, $_POST[
 
 if($stmt->execute()){
   $_SESSION['error']['succes'] = "Prawidlowo dodano użytkownia";
+
+  //wyslanie email widomosci na adress podanny przez użytkownika
+
+
   header('location: ../');
 } else {
   $_SESSION['error'] = "Nie dodano użytkownika";

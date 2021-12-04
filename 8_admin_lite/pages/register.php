@@ -17,6 +17,8 @@
 </head>
 <body class="hold-transition register-page">
 <?php
+
+//ilosś nieudanych rejestracij
 if(isste($_SESSION['count'])){
     echo $_SESSION['count'];
 }
