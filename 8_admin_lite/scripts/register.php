@@ -13,15 +13,35 @@ if(!empty($_POST)){
     }
     $_SESSION['form_date'][$key]=$value;
   }
+  //regex imię
+  //if (preg_match("/^[a-zzżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,12}$/i", $_POST['name'] = trim($_POST['name']))){
+
+  require_once '../functions/regex.php';
+
+  if(stringRegex($_POST['name'])){
+    $_POST['name'] = stringRegex($_POST['name']);
+  } else {
+    $error = 1;
+  }
+
+  if (preg_match("/^[a-zzżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,12}$/i", $_POST['surname'] = trim($_POST['surname']))){
+    $_POST['surname'] = ucfirst(mb_strtolower($_POST['surname'],'UTF-8'));
+  } else {
+    $_SESSION['error'] = "Błędnie wypełnione nazwisko";
+    $error = 1;
+  }
+
   if (!isset($_POST['terms'])){
-    $_SESSION['error'] = "Zatwierdż regulamin";
+    $_SESSION['error'] = "Zatwierdź regulamin";
     header('location: ../pages/register.php');
     exit();
   }
+
   if ($_POST['email']!=$_POST['email1']){
     $_SESSION['error'] = "email nie są takie same";
     $error = 1;
   }
+
   if ($_POST['password']!=$_POST['password1']){
     $_SESSION['error'] = "hasla są różne";
     $error = 1;
@@ -32,7 +52,7 @@ if ($error==1){
   header('location: ../pages/register.php');
   exit();
 }
-$pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
+  $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
 //echo $pass;
 
 //dodawanie użytkownika do bazy

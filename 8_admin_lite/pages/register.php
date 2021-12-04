@@ -68,7 +68,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control"  name="email1" placeholder="Powtóż Email" value="<?php echo $_SESSION['form_date']['email1'] ?? ''; ?>">
+          <input type="email" class="form-control"  name="email1" placeholder="Powtórz Email" value="<?php echo $_SESSION['form_date']['email1'] ?? ''; ?>">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -128,11 +128,13 @@
         <div class="input-group mb-3">
         <div class="form-group">
           <div class="custom-control custom-radio">
-            <input class="custom-control-input" type="radio" id="gender2" value="0" name="gender" <?php if($_SESSION['form_date']['gender']==0) echo "checked";?>>
+            <input class="custom-control-input" type="radio" id="gender2" value="0" name="gender" checked>
             <label for="gender2" class="custom-control-label">Kobieta</label>
           </div>
+<!--   <?php //echo $_SESSION['form_date']['gender']==0 ? "checked" : ''?>-->
+   <!-- <?php echo $_SESSION['form_date']['gender']==1 ? "checked" : ''?>-->
           <div class="custom-control custom-radio">
-            <input class="custom-control-input" type="radio" id="gender1" value="1" name="gender" <?php if($_SESSION['form_date']['gender']==1) echo "checked";?>>
+            <input class="custom-control-input" type="radio" id="gender1" value="1" name="gender" >
             <label for="gender1" class="custom-control-label">Męzczyzna</label>
           </div>
 
