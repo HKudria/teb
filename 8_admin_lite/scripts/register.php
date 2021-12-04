@@ -18,6 +18,7 @@ if(!empty($_POST)){
 
   require_once '../functions/regex.php';
 
+
   if(stringRegex($_POST['name'])){
     $name = stringRegex($_POST['name']);
   } else {
