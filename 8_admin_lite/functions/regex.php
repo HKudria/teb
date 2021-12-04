@@ -45,11 +45,13 @@ function stringRegex($string,$type = 'name'){
 
 }
 
-//$test = "adsA343f!";
+            //$test = "adsA343f!";
 //if(stringRegex($test,'password')){
 //    $test = stringRegex($test,'password');
 //    echo $test;
 //} else {
 //    echo "mistake";
 //}
+
+//echo $_SERVER['REMOTE_ADDR'];
 

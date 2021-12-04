@@ -54,14 +54,14 @@ if(!empty($_POST)){
     $error = 1;
   }
 
-  if ($pass!=stringRegex($_POST['password'],'password')){
+  if ($pass!=$_POST['password1']){
     $_SESSION['error'] = "hasla są różne";
     $error = 1;
   }
 
 
   //sprawdzamy plec
-  if($_POST['gender']!=0 || $_POST['gender']!=1){
+  if($_POST['gender'] != '0' && $_POST['gender'] != '1'){
     $_SESSION['error'] = "Wypełnij prawidłowo płeć";
     $error = 1;
   }
@@ -76,7 +76,7 @@ if(!empty($_POST)){
     header('location: ../pages/register.php');
     exit();
   }
-  $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
+  $pass = password_hash($pass, PASSWORD_DEFAULT);
 //echo $pass;
 
 //dodawanie użytkownika do bazy
@@ -85,9 +85,9 @@ $sql = "INSERT INTO `users` (`email`, `city_id`, `name`, `surname`, `birthday`, 
 $stmt = $db->prepare($sql);
 $stmt->bind_param("sssssss", $email, $_POST['city_id'], $name, $surname, $_POST['birthday'], $_POST['gender'], $pass);
 
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
+//   echo "<pre>";
+//   print_r($_POST);
+//   echo "</pre>";
 }
 
 if($stmt->execute()){
@@ -95,6 +95,12 @@ if($stmt->execute()){
   header('location: ../');
 } else {
   $_SESSION['error'] = "Nie dodano użytkownika";
+
+  if(!isset($_SESSION['coun'])){
+    $_SESSION['coun']=1;
+  } else $_SESSION['coun']++;
+
+
   header('location: ../pages/register.php');
 }
  ?>

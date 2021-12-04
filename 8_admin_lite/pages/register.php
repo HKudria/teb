@@ -16,7 +16,12 @@
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition register-page">
-<?php if(!empty($_SESSION['error'])){
+<?php
+if(isste($_SESSION['count'])){
+    echo $_SESSION['count'];
+}
+
+if(!empty($_SESSION['error'])){
   echo <<< KOMUNIKAT
    <div class="card card-danger">
     <div class="card-header">
