@@ -19,15 +19,14 @@ if(!empty($_POST)){
   require_once '../functions/regex.php';
 
   if(stringRegex($_POST['name'])){
-    $_POST['name'] = stringRegex($_POST['name']);
+    $name = stringRegex($_POST['name']);
   } else {
     $error = 1;
   }
 
-  if (preg_match("/^[a-zzżźćńółęąśŻŹĆĄŚĘŁÓŃ]{2,12}$/i", $_POST['surname'] = trim($_POST['surname']))){
-    $_POST['surname'] = ucfirst(mb_strtolower($_POST['surname'],'UTF-8'));
+  if(stringRegex($_POST['surname'],'surname')){
+    $surname = stringRegex($_POST['surname'],'surname');
   } else {
-    $_SESSION['error'] = "Błędnie wypełnione nazwisko";
     $error = 1;
   }
 
@@ -37,7 +36,13 @@ if(!empty($_POST)){
     exit();
   }
 
-  if ($_POST['email']!=$_POST['email1']){
+  if(stringRegex($_POST['email'],'email')){
+    $email = stringRegex($_POST['email'],'email');
+  } else {
+    $error = 1;
+  }
+
+  if ($email!=stringRegex($_POST['email1'],'email')){
     $_SESSION['error'] = "email nie są takie same";
     $error = 1;
   }
@@ -59,7 +64,7 @@ if ($error==1){
 require_once './connect.php';
 $sql = "INSERT INTO `users` (`email`, `city_id`, `name`, `surname`, `birthday`, `gender`, `password`) VALUES (?, ?, ?, ?, ?, ?, ?);";
 $stmt = $db->prepare($sql);
-$stmt->bind_param("sssssss", $_POST['email'], $_POST['city_id'], $_POST['name'], $_POST['surname'], $_POST['birthday'], $_POST['gender'], $pass);
+$stmt->bind_param("sssssss", $email, $_POST['city_id'], $name, $surname, $_POST['birthday'], $_POST['gender'], $pass);
 
 // echo "<pre>";
 // print_r($_POST);

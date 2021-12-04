@@ -20,3 +20,14 @@ if (preg_match("/^[a-zA-Z]{2,20}$/", $surname)){
 } else {
     echo "Nazwisko może miescić tylko male litery od 2 do 12 znaków<br>";
 }
+
+echo "<br><hr>";
+require_once './functions/regex.php';
+$test = "dsadfdf.ru";
+if(stringRegex($test)){
+    $test = stringRegex($test);
+    echo $test;
+} else {
+    echo "mistake";
+}
+
