@@ -87,7 +87,7 @@ if(!empty($_SESSION['error'])){
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" placeholder="Password" value="Lenovo121!">
+          <input type="password" class="form-control" name="password" placeholder="Password" value="TestPass!123">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -95,7 +95,7 @@ if(!empty($_SESSION['error'])){
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control"  name="password1" placeholder="Retype password" value="Lenovo121!">
+          <input type="password" class="form-control"  name="password1" placeholder="Retype password" value="TestPass!123">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
