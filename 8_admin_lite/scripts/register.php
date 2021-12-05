@@ -1,5 +1,13 @@
 <?php
 session_start();
+//podlączenia poczty
+require_once('../scripts/SMTP.php');
+require_once('../scripts/PHPMailer.php');
+require_once('../scripts/Exception.php');
+
+use \PHPMailer\PHPMailer\PHPMailer;
+use \PHPMailer\PHPMailer\Exception;
+
 //swrawdzenia wypelnenia wsztkich dannych
 
 if(!empty($_POST)){
@@ -94,6 +102,28 @@ if($stmt->execute()){
   $_SESSION['error']['succes'] = "Prawidlowo dodano użytkownia";
 
   //wyslanie email widomosci na adress podanny przez użytkownika
+  // 1 - konto nieaktywne, 2 - konto aktywne, 3 - zablokowane konto, 4 - usunięte konto
+
+
+
+
+
+  $mail = new PHPMailer(false); // Passing `true` enables exceptions
+
+  try {
+    require_once '../scripts/mailconfig.php';
+    $mail->addAddress($email, 'Nasza strona');     // Add a recipient
+    $mail->isHTML(true); // Set email format to HTML
+    $mail->Subject = 'Aktywacja konta';
+    $activation_link = bin2hex(random_bytes(15));
+    $mail->Body = "<a href=\"127.0.0.1\index.php?activation_link=$activation_link\">Link aktywujący konto</a>";
+    $mail->send();
+  } catch (Exception $e) {
+    $_SESSION['error'] = "Nie udało się wyslać maila";
+    $error = 1;
+  }
+
+
 
 
   header('location: ../');

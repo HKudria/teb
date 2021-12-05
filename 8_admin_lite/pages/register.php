@@ -19,7 +19,7 @@
 <?php
 
 //ilosś nieudanych rejestracij
-if(isste($_SESSION['count'])){
+if(isset($_SESSION['count'])){
     echo $_SESSION['count'];
 }
 
