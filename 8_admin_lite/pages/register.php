@@ -51,7 +51,8 @@ if(!empty($_SESSION['error'])){
 
       <form action="../scripts/register.php" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="name" placeholder="Podaj imię" value="<?php echo $_SESSION['form_date']['name'] ?? ''; ?>">
+          <input type="text" class="form-control" name="name" placeholder="Podaj imię" value="Herman">
+<!--          <input type="text" class="form-control" name="name" placeholder="Podaj imię" value="--><?php //echo $_SESSION['form_date']['name'] ?? ''; ?><!--">-->
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -59,7 +60,8 @@ if(!empty($_SESSION['error'])){
           </div>
         </div>
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="surname" placeholder="Podaj nazwisko" value="<?php echo $_SESSION['form_date']['surname'] ?? ''; ?>">
+            <input type="text" class="form-control" name="surname" placeholder="Podaj nazwisko" value="Kudria">
+<!--            <input type="text" class="form-control" name="surname" placeholder="Podaj nazwisko" value="--><?php //echo $_SESSION['form_date']['surname'] ?? ''; ?><!--">-->
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -67,7 +69,8 @@ if(!empty($_SESSION['error'])){
             </div>
           </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control"  name="email" placeholder="Email" value="<?php echo $_SESSION['form_date']['email'] ?? ''; ?>">
+          <input type="email" class="form-control"  name="email" placeholder="Email" value="hermanwebmasterpl@gmail.com">
+<!--          <input type="email" class="form-control"  name="email" placeholder="Email" value="--><?php //echo $_SESSION['form_date']['email'] ?? ''; ?><!--">-->
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -75,7 +78,8 @@ if(!empty($_SESSION['error'])){
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control"  name="email1" placeholder="Powtórz Email" value="<?php echo $_SESSION['form_date']['email1'] ?? ''; ?>">
+          <input type="email" class="form-control"  name="email1" placeholder="Powtórz Email" value="hermanwebmasterpl@gmail.com">
+<!--          <input type="email" class="form-control"  name="email1" placeholder="Powtórz Email" value="--><?php //echo $_SESSION['form_date']['email1'] ?? ''; ?><!--">-->
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -83,7 +87,7 @@ if(!empty($_SESSION['error'])){
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" placeholder="Password">
+          <input type="password" class="form-control" name="password" placeholder="Password" value="Lenovo121!">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -91,7 +95,7 @@ if(!empty($_SESSION['error'])){
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control"  name="password1" placeholder="Retype password">
+          <input type="password" class="form-control"  name="password1" placeholder="Retype password" value="Lenovo121!">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>

@@ -105,18 +105,16 @@ if($stmt->execute()){
   // 1 - konto nieaktywne, 2 - konto aktywne, 3 - zablokowane konto, 4 - usunięte konto
 
 
-
-
-
   $mail = new PHPMailer(false); // Passing `true` enables exceptions
-
   try {
     require_once '../scripts/mailconfig.php';
+    $mail->setFrom('hermanwebmasterpl@gmail.com', 'Herman webmaster');
     $mail->addAddress($email, 'Nasza strona');     // Add a recipient
     $mail->isHTML(true); // Set email format to HTML
+
     $mail->Subject = 'Aktywacja konta';
     $activation_link = bin2hex(random_bytes(15));
-    $mail->Body = "<a href=\"127.0.0.1\index.php?activation_link=$activation_link\">Link aktywujący konto</a>";
+    $mail->Body = "<h4>Aktywacja konta</h4><br><a href=\"http://localhost/teb/8_admin_lite/scripts/account_activation.php?activation_link=$activation_link&email=$email\">Link aktywujący konto</a>";
     $mail->send();
   } catch (Exception $e) {
     $_SESSION['error'] = "Nie udało się wyslać maila";
