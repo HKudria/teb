@@ -36,9 +36,15 @@ if(!empty($_GET['activation_link'])&&!empty($_GET['email'])) {
             //update daty aktywacji
             $sql = "UPDATE `activation_link` SET `updated_at` = CURRENT_TIME() WHERE `user_email` = '$_GET[email]'";
             $db->query($sql);
+//            $stmt = $db->prepare("UPDATE `activation_link` SET `updated_at` = CURRENT_TIME() WHERE `user_email` = ?");
+//            $stmt->bind_param('s',$_GET['email']);
+//            $stmt->execute();
             //update aktywacji konta
             $sql = "UPDATE `users` SET `activity_id` = '2'  WHERE `users`.`email` = '$_GET[email]'";
             $db->query($sql);
+//            $stmt = $db->prepare("UPDATE `users` SET `activity_id` = ? WHERE `user_email` = ?");
+//            $stmt->bind_param('ss',"1",$_GET['email']);
+//            $stmt->execute();
 
             //sprawdzamy czy konto jest aktywowane
             if ($db->affected_rows) {
