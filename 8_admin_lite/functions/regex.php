@@ -27,10 +27,13 @@ function stringRegex($string,$type = 'name'){
 
     if (preg_match($pattern, $string = trim($string))){
 
-        if ($type != 'password'){
+        if ($type != 'password' && $type != 'email'){
             $string = ucfirst(mb_strtolower($string,'UTF-8'));
         }
 
+        if($type == 'email'){
+            $string = mb_strtolower($string, 'UTF-8');
+        }
 
         //sprawdzamy podwójne nazwisko
         if ($type == 'surname' && preg_match('/-/',$string)){
