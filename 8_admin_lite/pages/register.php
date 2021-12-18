@@ -109,7 +109,7 @@ if(!empty($_SESSION['error'])){
             <select class="custom-select" name="city_id">
               <?php
               require_once '../scripts/connect.php';
-              $sql = "SELECT * FROM `cities`";
+              $sql = "SELECT * FROM `cities` ORDER BY `city`";
               $result = $db->query($sql);
               while ($city = $result->fetch_assoc()) {
                 if($city['city_id'] == $_SESSION['form_date']['city_id']){

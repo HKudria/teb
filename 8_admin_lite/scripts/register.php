@@ -85,7 +85,7 @@ if(!empty($_POST)){
     exit();
   }
   $pass = password_hash($pass, PASSWORD_DEFAULT);
-//echo $pass;
+
 
   //avatar
   if($_POST['gender'] == '1'){
@@ -96,9 +96,6 @@ if(!empty($_POST)){
 
 //dodawanie użytkownika do bazy
 require_once './connect.php';
-//$sql = "INSERT INTO `users` (`email`, `city_id`, `name`, `surname`, `birthday`, `gender`, `password`) VALUES (?, ?, ?, ?, ?, ?, ?);";
-//$stmt = $db->prepare($sql);
-//$stmt->bind_param("sssssss", $email, $_POST['city_id'], $name, $surname, $_POST['birthday'], $_POST['gender'], $pass);
   $sql = "INSERT INTO `users` (`email`, `city_id`, `name`, `surname`, `birthday`, `gender`,`avatar`, `password`) VALUES (?, ?, ?, ?, ?, ?, ?,?);";
   $stmt = $db->prepare($sql);
   $stmt->bind_param("ssssssss", $email, $_POST['city_id'], $name, $surname, $_POST['birthday'], $_POST['gender'], $avatar, $pass);
