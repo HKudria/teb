@@ -32,6 +32,9 @@ if(!empty($_POST)){
                     $_SESSION['error']['succes']= "Witaj ". $user['email'];
                         $_SESSION['logged']['role_id'] = $user['role_id'];
                         $_SESSION['logged']['email'] = $user['email'];
+                        $_SESSION['logged']['name'] = $user['name'];
+                        $_SESSION['logged']['surname'] = $user['surname'];
+                        $_SESSION['logged']['avatar'] = $user['avatar'];
                         header('location: ../pages/logged/home.php');
                         exit();
                 } else {
