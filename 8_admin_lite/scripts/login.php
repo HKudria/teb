@@ -29,12 +29,13 @@ if(!empty($_POST)){
             if (password_verify($_POST['password'],$user['password'])){
 
                 if($user['activity_id']==2) {
-                    $_SESSION['error']['succes']= "Witaj ". $user['email'];
+                    //$_SESSION['error']['succes']= "Witaj ". $user['email'];
                         $_SESSION['logged']['role_id'] = $user['role_id'];
                         $_SESSION['logged']['email'] = $user['email'];
                         $_SESSION['logged']['name'] = $user['name'];
                         $_SESSION['logged']['surname'] = $user['surname'];
                         $_SESSION['logged']['avatar'] = $user['avatar'];
+                        //bierzemy role id z tabeli userRole
                     $sql = "SELECT `role_id` FROM `userRole` WHERE `user_id` = '$user[id]'";
                     $result = $db->query($sql);
                     $user = $result->fetch_assoc();
