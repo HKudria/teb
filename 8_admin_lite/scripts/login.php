@@ -19,7 +19,7 @@ if(!empty($_POST)){
 
         //sprawdzamy czy mail jest prawidlowo wypelniony
         require_once '../scripts/connect.php';
-        $sql = "SELECT * FROM `users` WHERE `email` = '$email'";
+        $sql = "SELECT * FROM `user` WHERE `email` = '$email'";
         $result = $db->query($sql);
         $user = $result->fetch_assoc();
 
@@ -35,7 +35,11 @@ if(!empty($_POST)){
                         $_SESSION['logged']['name'] = $user['name'];
                         $_SESSION['logged']['surname'] = $user['surname'];
                         $_SESSION['logged']['avatar'] = $user['avatar'];
-                        header('location: ../pages/logged/home.php');
+                    $sql = "SELECT `role_id` FROM `userRole` WHERE `user_id` = '$user[id]'";
+                    $result = $db->query($sql);
+                    $user = $result->fetch_assoc();
+                    $_SESSION['logged']['role_id'] = $user['role_id'];
+                       header('location: ../pages/logged/home.php');
                         exit();
                 } else {
                     $sql = "SELECT `description` FROM `activity` WHERE `activity_id` = '$user[activity_id]'";

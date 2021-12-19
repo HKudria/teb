@@ -25,7 +25,7 @@ if(!empty($_GET['activation_link'])&&!empty($_GET['email'])) {
         if($time->h>24) {
             //jezeli link starszy od 24 godzin to wycofujemy uzytkownika z systemu
             $_SESSION['error'] = "Link już nie aktywny";
-            $sql = "DELETE FROM `users` WHERE `email` = '$_GET[email]'";
+            $sql = "DELETE FROM `user` WHERE `email` = '$_GET[email]'";
             $db->query($sql);
             $sql = "DELETE FROM `activation_link` WHERE `user_email` = '$_GET[email]'";
             $db->query($sql);
@@ -40,7 +40,7 @@ if(!empty($_GET['activation_link'])&&!empty($_GET['email'])) {
 //            $stmt->bind_param('s',$_GET['email']);
 //            $stmt->execute();
             //update aktywacji konta
-            $sql = "UPDATE `users` SET `activity_id` = '2'  WHERE `users`.`email` = '$_GET[email]'";
+            $sql = "UPDATE `user` SET `activity_id` = '2'  WHERE `user`.`email` = '$_GET[email]'";
             $db->query($sql);
 //            $stmt = $db->prepare("UPDATE `users` SET `activity_id` = ? WHERE `user_email` = ?");
 //            $stmt->bind_param('ss',"1",$_GET['email']);

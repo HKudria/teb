@@ -12,12 +12,14 @@ use \PHPMailer\PHPMailer\Exception;
 
 if(!empty($_POST)){
   $error = 0;
+//  echo "<pre>";
+//  echo $_POST;
+//  echo "</pre>";
   foreach ($_POST as $key => $value) {
-
     if(empty($value)){
       if($key == "gender") continue;
       $_SESSION['error'] = "Nie wypelnilesz wszystkiego";
-      header('location: ../pages/register.php');
+     // header('location: ../pages/register.php');
       exit();
     }
     $_SESSION['form_date'][$key]=$value;
@@ -96,15 +98,26 @@ if(!empty($_POST)){
 
 //dodawanie użytkownika do bazy
 require_once './connect.php';
-  $sql = "INSERT INTO `users` (`email`, `city_id`, `name`, `surname`, `birthday`, `gender`,`avatar`, `password`) VALUES (?, ?, ?, ?, ?, ?, ?,?);";
+  $sql = "INSERT INTO `User` (`name`, `surname`, `email`, `password`, `gender`, `birthday`, `avatar`) VALUES (?, ?, ?, ?, ?, ?,?);";
   $stmt = $db->prepare($sql);
-  $stmt->bind_param("ssssssss", $email, $_POST['city_id'], $name, $surname, $_POST['birthday'], $_POST['gender'], $avatar, $pass);
+  $stmt->bind_param("sssssss",  $name, $surname, $email, $pass, $_POST['gender'], $_POST['birthday'], $avatar );
+
+
+
+
 //   echo "<pre>";
 //   print_r($_POST);
 //   echo "</pre>";
 }
 
 if($stmt->execute()){
+  $sql = "SELECT `id` FROM `User` WHERE `email` = '$email'";
+  $result = $db->query($sql);
+  $userId = $result->fetch_assoc();
+  $sql = "INSERT INTO `UserRole` (`user_id`, `role_id`) VALUES (?, ?); ";
+  $stmt = $db->prepare($sql);
+  $stmt->bind_param("ss",  $userId['id'], $_POST['role_id']);
+  $stmt->execute();
   $_SESSION['error']['succes'] = "Prawidlowo dodano użytkownia";
 
   //wyslanie email widomosci na adress podanny przez użytkownika

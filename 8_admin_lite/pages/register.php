@@ -104,26 +104,50 @@ if(!empty($_SESSION['error'])){
         </div>
 <!-- miasto -->
           <!-- select -->
-
-          <div class="input-group mb-3">
-            <select class="custom-select" name="city_id">
-              <?php
-              require_once '../scripts/connect.php';
-              $sql = "SELECT * FROM `cities` ORDER BY `city`";
-              $result = $db->query($sql);
-              while ($city = $result->fetch_assoc()) {
-                if($city['city_id'] == $_SESSION['form_date']['city_id']){
-                  echo "<option value=\"$city[city_id]\" selected> $city[city] </option>";
-                } else
-                echo "<option value=\"$city[city_id]\"> $city[city] </option>";
-              }
-              ?>
-            </select>
-            <div class="input-group-text">
-              <span class="fas fa-city"></span>
-            </div>
-          </div>
+<!---->
+<!--          <div class="input-group mb-3">-->
+<!--            <select class="custom-select" name="city_id">-->
+<!--              --><?php
+//              require_once '../scripts/connect.php';
+//              $sql = "SELECT * FROM `cities` ORDER BY `city`";
+//              $result = $db->query($sql);
+//              while ($city = $result->fetch_assoc()) {
+//                if($city['city_id'] == $_SESSION['form_date']['city_id']){
+//                  echo "<option value=\"$city[city_id]\" selected> $city[city] </option>";
+//                } else
+//                echo "<option value=\"$city[city_id]\"> $city[city] </option>";
+//              }
+//              ?>
+<!--            </select>-->
+<!--            <div class="input-group-text">-->
+<!--              <span class="fas fa-city"></span>-->
+<!--            </div>-->
+<!--          </div>-->
 <!-- end miasto -->
+
+
+<!-- uprawnienia -->
+          <!-- select -->
+          <div class="input-group mb-3">
+                <select class="custom-select" name="role_id">
+                            <?php
+                            require_once '../scripts/connect.php';
+                            $sql = "SELECT * FROM `role` ORDER BY `name`";
+                            $result = $db->query($sql);
+                            while ($role = $result->fetch_assoc()) {
+                                if ($role['name'] == 'user'){
+                                    echo "<option value=\"$role[id]\" selected> $role[name] </option>";
+                                } else {
+                                    echo "<option value=\"$role[id]\"> $role[name] </option>";
+                                }
+                            }
+                            ?>
+                          </select>
+                          <div class="input-group-text">
+                            <span class="fas fa-city"></span>
+                          </div>
+                        </div>
+<!-- /uprawnienia -->
 
 <!-- birthday -->
         <div class="input-group mb-3">
