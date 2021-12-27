@@ -30,7 +30,6 @@ if(!empty($_POST)){
 
                 if($user['activity_id']==2) {
                     //$_SESSION['error']['succes']= "Witaj ". $user['email'];
-                        $_SESSION['logged']['role_id'] = $user['role_id'];
                         $_SESSION['logged']['email'] = $user['email'];
                         $_SESSION['logged']['name'] = $user['name'];
                         $_SESSION['logged']['surname'] = $user['surname'];

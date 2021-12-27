@@ -105,9 +105,9 @@ require_once './connect.php';
 
 
 
-//   echo "<pre>";
-//   print_r($_POST);
-//   echo "</pre>";
+   echo "<pre>";
+   print_r($_POST);
+   echo "</pre>";
 }
 
 if($stmt->execute()){
@@ -153,6 +153,6 @@ if($stmt->execute()){
   } else $_SESSION['coun']++;
 
 
-  header('location: ../pages/register.php');
+//  header('location: ../pages/register.php');
 }
  ?>
