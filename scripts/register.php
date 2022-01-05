@@ -131,7 +131,7 @@ if($stmt->execute()){
     $mail->addAddress($email, 'Nasza strona');     // Add a recipient
     $mail->isHTML(true); // Set email format to HTML
     $mail->Subject = 'Aktywacja konta';
-    $mail->Body = "<h4>Aktywacja konta</h4><br><a href=\"http://localhost/teb/8_admin_lite/scripts/account_activation.php?activation_link=$activation_link&email=$email\">Link aktywujący konto</a>";
+    $mail->Body = "<h4>Aktywacja konta</h4><br><a href=\"http://localhost/teb/scripts/account_activation.php?activation_link=$activation_link&email=$email\">Link aktywujący konto</a>";
     $mail->send();
   } catch (Exception $e) {
     $_SESSION['error'] = "Nie udało się wyslać maila";
