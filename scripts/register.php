@@ -86,7 +86,10 @@ if(!empty($_POST)){
     header('location: ../pages/register.php');
     exit();
   }
-  $pass = password_hash($pass, PASSWORD_DEFAULT);
+  //fow windows
+  $pass = password_hash($pass, PASSWORD_ARGON2ID);
+  //for macOS
+  //$pass = password_hash($pass, PASSWORD_DEFAULT);
 
 
   //avatar
