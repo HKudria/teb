@@ -594,7 +594,7 @@
                                     <tbody>
                                     <?php
                                     require_once '../../scripts/connect.php';
-                                    $result = $db->query("SELECT * FROM `user` INNER JOIN userrole ON id = user_id ORDER BY last_login");
+                                    $result = $db->query("SELECT * FROM `user` INNER JOIN userrole ON id = user_id ORDER BY last_login DESC");
                                     while($date = $result->fetch_assoc()){
                                         echo <<<DATE
                                          <tr>
@@ -628,12 +628,12 @@
                                                 break;
                                         }
 
-                                    echo <<<LAST
+                                    echo <<<LASTLOGIN
                                         <td>
                                             <div class="sparkbar" data-color="#00a65a" data-height="20">$date[last_login]</div>
                                         </td>
                                      </tr>
-                                    LAST;
+                                    LASTLOGIN;
                                     }
                                     ?>
 
