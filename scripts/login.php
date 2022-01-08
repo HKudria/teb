@@ -28,6 +28,10 @@ if(!empty($_POST)){
             //sprawdzamy hasło
             if (password_verify($_POST['password'],$user['password'])){
 
+                //aktualizacja daty logowania
+                $sql = "UPDATE `user` SET `last_login` = CURRENT_TIME() WHERE `email` = '$user[email]'";
+                $db->query($sql);
+
                 if($user['activity_id']==2) {
                     //$_SESSION['error']['succes']= "Witaj ". $user['email'];
                         $_SESSION['logged']['email'] = $user['email'];
@@ -39,8 +43,10 @@ if(!empty($_POST)){
                     $result = $db->query($sql);
                     $user = $result->fetch_assoc();
                     $_SESSION['logged']['role_id'] = $user['role_id'];
-                       header('location: ../pages/logged/home.php');
-                        exit();
+
+
+                    header('location: ../pages/logged/home.php');
+                    exit();
                 } else {
                     $sql = "SELECT `description` FROM `activity` WHERE `activity_id` = '$user[activity_id]'";
                     $result = $db->query($sql);

@@ -585,69 +585,59 @@
                                 <table class="table m-0">
                                     <thead>
                                     <tr>
-                                        <th>Order ID</th>
-                                        <th>Item</th>
-                                        <th>Status</th>
-                                        <th>Popularity</th>
+                                        <th>Imie i nazwisko</th>
+                                        <th>Uprawnienia</th>
+                                        <th>Status konta</th>
+                                        <th>Data ostatniego logowania</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                        <td>Call of Duty IV</td>
-                                        <td><span class="badge badge-success">Shipped</span></td>
+                                    <?php
+                                    require_once '../../scripts/connect.php';
+                                    $result = $db->query("SELECT * FROM `user` INNER JOIN userrole ON id = user_id ORDER BY last_login");
+                                    while($date = $result->fetch_assoc()){
+                                        echo <<<DATE
+                                         <tr>
+                                            <td>$date[name] $date[surname]</td>
+                                    DATE;
+
+                                        switch ($date['role_id']){
+                                            case 1:
+                                                echo "<td><span class=\"badge badge-success\">Użytkownik</span></td>";
+                                                break;
+                                            case 2:
+                                                echo "<td><span class=\"badge badge-info\">Administrator</span></td>";
+                                                break;
+                                            case 3:
+                                                echo "<td><span class=\"badge badge-danger\">Moderator</span></td>";
+                                                break;
+                                        }
+
+                                        switch ($date['activity_id']){
+                                            case 1:
+                                                echo "<td><span class=\"badge badge-info\">Niaktywny</span></td>";
+                                                break;
+                                            case 2:
+                                                echo "<td><span class=\"badge badge-success\">Aktywowany</span></td>";
+                                                break;
+                                            case 3:
+                                                echo "<td><span class=\"badge badge-warning\">Zablokowany</span></td>";
+                                                break;
+                                            case 4:
+                                                echo "<td><span class=\"badge badge-danger\">Usunięty</span></td>";
+                                                break;
+                                        }
+
+                                    echo <<<LAST
                                         <td>
-                                            <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                                            <div class="sparkbar" data-color="#00a65a" data-height="20">$date[last_login]</div>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                        <td>Samsung Smart TV</td>
-                                        <td><span class="badge badge-warning">Pending</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                        <td>iPhone 6 Plus</td>
-                                        <td><span class="badge badge-danger">Delivered</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                        <td>Samsung Smart TV</td>
-                                        <td><span class="badge badge-info">Processing</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                                        <td>Samsung Smart TV</td>
-                                        <td><span class="badge badge-warning">Pending</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                                        <td>iPhone 6 Plus</td>
-                                        <td><span class="badge badge-danger">Delivered</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                                        <td>Call of Duty IV</td>
-                                        <td><span class="badge badge-success">Shipped</span></td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                                        </td>
-                                    </tr>
+                                     </tr>
+                                    LAST;
+                                    }
+                                    ?>
+
+
                                     </tbody>
                                 </table>
                             </div>
@@ -672,7 +662,7 @@
                         <div class="info-box-content">
                             <span class="info-box-text">Moderatory</span>
                             <?php
-                            $result = $db->query("SELECT COUNT(*) as count FROM `user` INNER JOIN `userrole` ON `id` = `user_id` WHERE `role_id` = 3");
+                            $result = $db->query("SELECT COUNT(*) as count FROM `user` INNER JOIN `userrole` ON `id` = `user_id` WHERE `role_id` = 3 AND `activity_id` = 2");
                             $result = $result->fetch_assoc();
                             echo "<span class=\"info-box-number\">{$result['count']}</span>";
                             ?>
@@ -698,7 +688,7 @@
                         <span class="info-box-icon"><i class="fas fa-cloud-download-alt"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Zablokowani</span>
+                            <span class="info-box-text">Zablokowani użytkownicy</span>
                             <?php
                             $result = $db->query("SELECT COUNT(*) as count FROM `user` WHERE `activity_id` = 3");
                             $result = $result->fetch_assoc();
@@ -712,7 +702,7 @@
                         <span class="info-box-icon"><i class="far fa-comment"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">Wszyscy</span>
+                            <span class="info-box-text">Wszyscy użytkownicy</span>
                             <?php
                             $result = $db->query("SELECT COUNT(*) as count FROM `user`");
                             $result = $result->fetch_assoc();
