@@ -686,7 +686,7 @@
                         <div class="info-box-content">
                             <span class="info-box-text">Użytkowniki</span>
                             <?php
-                            $result = $db->query("SELECT COUNT(*) as count FROM `user` WHERE `activity_id` = 2");
+                            $result = $db->query("SELECT COUNT(*) as count FROM `user` INNER JOIN `userrole` ON `id` = `user_id` WHERE `role_id` = 1 AND `activity_id` = 2");
                             $result = $result->fetch_assoc();
                             echo "<span class=\"info-box-number\">{$result['count']}</span>";
                             ?>
