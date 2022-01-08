@@ -593,8 +593,7 @@
                                     </thead>
                                     <tbody>
                                     <?php
-                                    require_once '../../scripts/connect.php';
-                                    $result = $db->query("SELECT * FROM `user` INNER JOIN userrole ON id = user_id ORDER BY last_login DESC");
+                                    $result = $db->query("SELECT * FROM `user` INNER JOIN userrole ON id = user_id ORDER BY last_login DESC LIMIT 5");
                                     while($date = $result->fetch_assoc()){
                                         echo <<<DATE
                                          <tr>
@@ -609,7 +608,10 @@
                                                 echo "<td><span class=\"badge badge-info\">Administrator</span></td>";
                                                 break;
                                             case 3:
-                                                echo "<td><span class=\"badge badge-danger\">Moderator</span></td>";
+                                                echo "<td><span class=\"badge badge-warning\">Moderator</span></td>";
+                                                break;
+                                            default:
+                                                echo  "<td><span class=\"badge badge-danger\">Skoryguj ROLE</span></td>";
                                                 break;
                                         }
 
@@ -625,6 +627,9 @@
                                                 break;
                                             case 4:
                                                 echo "<td><span class=\"badge badge-danger\">Usunięty</span></td>";
+                                                break;
+                                            default:
+                                                echo  "<td><span class=\"badge badge-danger\">Skoryguj AKTYWNOSC USERA</span></td>";
                                                 break;
                                         }
 
