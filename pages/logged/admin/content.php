@@ -495,10 +495,10 @@
                             <!-- USERS LIST -->
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Latest Members</h3>
+                                    <h3 class="card-title">Ostatnio zalogowani</h3>
 
                                     <div class="card-tools">
-                                        <span class="badge badge-danger">8 New Members</span>
+                                        <span class="badge badge-success">8 ostatnich logowań</span>
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                             <i class="fas fa-minus"></i>
                                         </button>
@@ -510,46 +510,37 @@
                                 <!-- /.card-header -->
                                 <div class="card-body p-0">
                                     <ul class="users-list clearfix">
-                                        <li>
-                                            <img src="../../dist/img/user1-128x128.jpg" alt="User Image">
-                                            <a class="users-list-name" href="#">Alexander Pierce</a>
-                                            <span class="users-list-date">Today</span>
-                                        </li>
-                                        <li>
-                                            <img src="../../dist/img/user8-128x128.jpg" alt="User Image">
-                                            <a class="users-list-name" href="#">Norman</a>
-                                            <span class="users-list-date">Yesterday</span>
-                                        </li>
-                                        <li>
-                                            <img src="../../dist/img/user7-128x128.jpg" alt="User Image">
-                                            <a class="users-list-name" href="#">Jane</a>
-                                            <span class="users-list-date">12 Jan</span>
-                                        </li>
-                                        <li>
-                                            <img src="../../dist/img/user6-128x128.jpg" alt="User Image">
-                                            <a class="users-list-name" href="#">John</a>
-                                            <span class="users-list-date">12 Jan</span>
-                                        </li>
-                                        <li>
-                                            <img src="../../dist/img/user2-160x160.jpg" alt="User Image">
-                                            <a class="users-list-name" href="#">Alexander</a>
-                                            <span class="users-list-date">13 Jan</span>
-                                        </li>
-                                        <li>
-                                            <img src="../../dist/img/user5-128x128.jpg" alt="User Image">
-                                            <a class="users-list-name" href="#">Sarah</a>
-                                            <span class="users-list-date">14 Jan</span>
-                                        </li>
-                                        <li>
-                                            <img src="../../dist/img/user4-128x128.jpg" alt="User Image">
-                                            <a class="users-list-name" href="#">Nora</a>
-                                            <span class="users-list-date">15 Jan</span>
-                                        </li>
-                                        <li>
-                                            <img src="../../dist/img/user3-128x128.jpg" alt="User Image">
-                                            <a class="users-list-name" href="#">Nadia</a>
-                                            <span class="users-list-date">15 Jan</span>
-                                        </li>
+                                        <?php
+                                        $result = $db->query("SELECT * FROM `user` ORDER BY `last_login` DESC LIMIT 8");
+                                        $now = new DateTime();
+                                        $now->format('Y-m-d H:i:s');
+                                        while($date = $result->fetch_assoc())
+                                        {
+                                            $created_at = DateTime::createFromFormat("Y-m-d H:i:s", $date['last_login']);
+                                            $time = $now->diff($created_at);
+                                            switch ($time->d){
+                                                case 0:
+                                                    $times = 'Dzisiaj';
+                                                    break;
+                                                case 1:
+                                                    $times = 'Wczoraj';
+                                                    break;
+                                                default:
+                                                    $times = strftime("%d %b", strtotime($date['last_login']));;
+                                                    break;
+                                            }
+
+                                                echo <<<DATE
+                                                     <li>
+                                                        <img src="../../dist/img/$date[avatar]" alt="$date[name] $date[surname]">
+                                                        <a>$date[name] $date[surname]</a>
+                                                        <span class="users-list-date">$times</span>
+                                                    </li>
+                                                DATE;
+                                        }
+                                        ?>
+
+
                                     </ul>
                                     <!-- /.users-list -->
                                 </div>
@@ -568,7 +559,7 @@
                     <!-- TABLE: LATEST ORDERS -->
                     <div class="card">
                         <div class="card-header border-transparent">
-                            <h3 class="card-title">Latest Orders</h3>
+                            <h3 class="card-title">Logowanie użytkowników</h3>
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
