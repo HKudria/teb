@@ -19,7 +19,7 @@ if(!empty($_POST)){
     if(empty($value)){
       if($key == "gender") continue;
       $_SESSION['error'] = "Nie wypelnilesz wszystkiego";
-     // header('location: ../pages/register.php');
+      header('location: ../pages/register.php');
       exit();
     }
     $_SESSION['form_date'][$key]=$value;
