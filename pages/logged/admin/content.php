@@ -510,13 +510,21 @@
                                 <!-- /.card-header -->
                                 <div class="card-body p-0">
                                     <ul class="users-list clearfix">
+                                <!-- 8 last logged people sorted by "last_login" -->
                                         <?php
                                         $result = $db->query("SELECT * FROM `user` ORDER BY `last_login` DESC LIMIT 8");
+                                        //create new DateTime object
                                         $now = new DateTime();
+                                        //write the same format date which in DB
                                         $now->format('Y-m-d H:i:s');
-                                        while($date = $result->fetch_assoc())
-                                        {
+                                        while($date = $result->fetch_assoc()){
+                                            //create new Date object with date from DB and write format
                                             $created_at = DateTime::createFromFormat("Y-m-d H:i:s", $date['last_login']);
+                                            //make difference between $now date and date from db
+                                            //$time->s difference by second
+                                            //$time->m difference by minute
+                                            //$time->h difference by hour
+                                            //$time->d difference by day
                                             $time = $now->diff($created_at);
                                             switch ($time->d){
                                                 case 0:
@@ -584,7 +592,7 @@
                                     </thead>
                                     <tbody>
                                     <?php
-                                    $result = $db->query("SELECT * FROM `user` INNER JOIN userrole ON id = user_id ORDER BY last_login DESC LIMIT 5");
+                                    $result = $db->query("SELECT * FROM `user` INNER JOIN userrole ON user.id = userrole.user_id INNER JOIN activity ON user.activity_id = activity.activity_id ORDER BY user.last_login DESC LIMIT 5");
                                     while($date = $result->fetch_assoc()){
                                         echo <<<DATE
                                          <tr>
@@ -605,22 +613,21 @@
                                                 echo  "<td><span class=\"badge badge-danger\">Skoryguj ROLE</span></td>";
                                                 break;
                                         }
-
+                                        //opis konta (status) pobierany z BD
+                                        $activityDescription = explode(',',$date['description']);
+                                        $active = ucfirst( $activityDescription['0']);
                                         switch ($date['activity_id']){
                                             case 1:
-                                                echo "<td><span class=\"badge badge-info\">Niaktywny</span></td>";
+                                                echo "<td><span class=\"badge badge-info\">$active</span></td>";
                                                 break;
                                             case 2:
-                                                echo "<td><span class=\"badge badge-success\">Aktywowany</span></td>";
+                                                echo "<td><span class=\"badge badge-success\">$active</span></td>";
                                                 break;
                                             case 3:
-                                                echo "<td><span class=\"badge badge-warning\">Zablokowany</span></td>";
+                                                echo "<td><span class=\"badge badge-warning\">$active</span></td>";
                                                 break;
                                             case 4:
-                                                echo "<td><span class=\"badge badge-danger\">Usunięty</span></td>";
-                                                break;
-                                            default:
-                                                echo  "<td><span class=\"badge badge-danger\">Skoryguj AKTYWNOSC USERA</span></td>";
+                                                echo "<td><span class=\"badge badge-danger\">$active</span></td>";
                                                 break;
                                         }
 
